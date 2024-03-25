@@ -3,6 +3,11 @@
 #include <queue>
 #include <random>
 #include <algorithm>
+#include <conio.h>
+
+// ESC key assignment
+#define QUIT 27
+
 
 // struct for deck of cards
 struct Deck
@@ -104,6 +109,23 @@ int main()
         // displaying how many cards players have left
         std::cout << "\nP1 cards left: " << p1_cards.size();
         std::cout << "\nP2 cards left: " << p2_cards.size();
+
+        int key = 0; // Variable for storing the pressed key
+
+        // displaying instructions for the player
+        std::cout << "\n\nPress any key to continue or ESC to quit.\n";
+
+        // when you press the ESC key, the game closes
+        // if any other key is pressed, the game continues
+        switch(key = getch())
+        {
+            case QUIT:
+                return 0;
+                break;
+
+            default:
+                break;
+        }
 
         // displaying the card played that is the first in players' queues
         std::cout << "\n\n" << cards[p1_cards.front()].card << " vs " << cards[p2_cards.front()].card;
