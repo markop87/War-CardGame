@@ -93,5 +93,23 @@ int main()
         p2_cards.push(i);
     }
 
+    int round = 1; // round counter
+
+    //game loop, that will be repeated until one player's queue is empty, that means he will lose all his cards
+    while(!p1_cards.empty() && !p2_cards.empty())
+    {
+        // displaying the current round
+        std::cout << "Round " << round << "\n";
+
+        // displaying how many cards players have left
+        std::cout << "\nP1 cards left: " << p1_cards.size();
+        std::cout << "\nP2 cards left: " << p2_cards.size();
+
+        // displaying the card played that is the first in players' queues
+        std::cout << "\n\n" << cards[p1_cards.front()].card << " vs " << cards[p2_cards.front()].card;
+
+        round++; // increasing the round counter
+    }
+
     return 0;
 }
