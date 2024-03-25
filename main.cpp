@@ -108,6 +108,33 @@ int main()
         // displaying the card played that is the first in players' queues
         std::cout << "\n\n" << cards[p1_cards.front()].card << " vs " << cards[p2_cards.front()].card;
 
+        // when player 1's card has a higher value than player 2's card
+        if(cards[p1_cards.front()].value > cards[p2_cards.front()].value)
+        {
+            std::cout << "\nPlayer 1 won!\n";
+
+            // adding both cards to the end of the first player's queue
+            p1_cards.push(p1_cards.front());
+            p1_cards.push(p2_cards.front());
+
+            // removing played cards from the queue
+            p1_cards.pop();
+            p2_cards.pop();
+        }
+        // when player 2's card has a higher value than player 1's card
+        else if(cards[p1_cards.front()].value < cards[p2_cards.front()].value)
+        {
+            std::cout << "\nPlayer 2 won!\n";
+
+            // adding both cards to the end of the second player's queue
+            p2_cards.push(p2_cards.front());
+            p2_cards.push(p1_cards.front());
+
+            // removing played cards from the queue
+            p1_cards.pop();
+            p2_cards.pop();
+        }
+
         round++; // increasing the round counter
     }
 
