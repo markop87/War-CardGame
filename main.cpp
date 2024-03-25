@@ -134,6 +134,84 @@ int main()
             p1_cards.pop();
             p2_cards.pop();
         }
+        // when there is a tie
+        else if (cards[p1_cards.front()].value == cards[p2_cards.front()].value && p1_cards.size() > 3 && p2_cards.size() > 3)
+        {
+            std::cout << " - War!\n"; // note for a draw
+
+            std::queue <int> war; // new queue for storing played cards
+
+            // adding played cards to a war queue
+            war.push(p1_cards.front());
+            war.push(p2_cards.front());
+
+            // loop for playing the war
+            // this repeats until one player's face-up card is higher than their opponent's
+            while(cards[p1_cards.front()].value == cards[p2_cards.front()].value)
+            {
+                // removing previously played cards from the players queue
+                p1_cards.pop();
+                p2_cards.pop();
+
+                // cards over which the war will be fought
+                std::cout << cards[p1_cards.front()].card << " vs " << cards[p2_cards.front()].card << "\n";
+
+                // adding those card to a war queue
+                war.push(p1_cards.front());
+                war.push(p2_cards.front());
+
+                // removing cards from the players queue
+                p1_cards.pop();
+                p2_cards.pop();
+
+                // cards that decide the fate of the war
+                std::cout << cards[p1_cards.front()].card << " vs " << cards[p2_cards.front()].card << "\n";
+
+                // adding those card to a war queue
+                war.push(p1_cards.front());
+                war.push(p2_cards.front());
+
+                // if player 1's card is higher, the cards from the war queue will be transferred to his turn
+                if(cards[p1_cards.front()].value > cards[p2_cards.front()].value)
+                {
+                    std::cout << "\nPlayer 1 won!\n";
+
+                    while(!war.empty())
+                    {
+                        p1_cards.push(war.front());
+                        war.pop();
+                    }
+                }
+                // if player 2's card is higher, the cards from the war queue will be transferred to his turn
+                if(cards[p1_cards.front()].value < cards[p2_cards.front()].value)
+                {
+                    std::cout << "\nPlayer 2 won!\n";
+
+                    while(!war.empty())
+                    {
+                        p2_cards.push(war.front());
+                        war.pop();
+                    }
+                }
+
+            }
+
+            // removing previously played cards from the players queue
+            p1_cards.pop();
+            p2_cards.pop();
+        }
+        // when there is a tie but player 1 has too few cards for war
+        else if(cards[p1_cards.front()].value == cards[p2_cards.front()].value && p1_cards.size() < 3)
+        {
+            std::cout << "Player 1 doesn't have enough cards!\nPlayer 2 won the war!\n";
+            return 0;
+        }
+        // when there is a tie but player 2 has too few cards for war
+        else if(cards[p1_cards.front()].value == cards[p2_cards.front()].value && p2_cards.size() < 3)
+        {
+            std::cout << "Player 2 doesn't have enough cards!\nPlayer 1 won the war!\n";
+            return 0;
+        }
 
         round++; // increasing the round counter
     }
