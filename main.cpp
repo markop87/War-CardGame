@@ -1,5 +1,8 @@
 #include <iostream>
 #include <vector>
+#include <queue>
+#include <random>
+#include <algorithm>
 
 // struct for deck of cards
 struct Deck
@@ -70,6 +73,25 @@ int main()
         { " K\x04", 13 },
         { " A\x04", 14 }
     };
+
+    //shuffle vector of objects "cards"
+    std::random_device rd;
+    std::shuffle(cards.begin(), cards.end(), rd);
+
+    std::queue <int> p1_cards; //queue for player 1's cards
+    std::queue <int> p2_cards; //queue for player 2's cards
+
+    // adding each even card to the first player's queue
+    for(int i = 0; i < 52; i+=2)
+    {
+        p1_cards.push(i);
+    }
+
+    // adding every odd card to the second player's turn
+    for(int i = 1; i < 53; i+=2)
+    {
+        p2_cards.push(i);
+    }
 
     return 0;
 }
