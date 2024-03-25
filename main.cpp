@@ -8,6 +8,17 @@
 // ESC key assignment
 #define QUIT 27
 
+// function to clear screen
+void Clear()
+{
+    #if defined _WIN32
+        system("cls"); // windows
+    #elif defined (__LINUX__) || defined(__gnu_linux__) || defined(__linux__)
+        system("clear"); // linux
+    #elif defined (__APPLE__)
+        system("clear"); // apple
+    #endif
+}
 
 // struct for deck of cards
 struct Deck
@@ -124,6 +135,7 @@ int main()
                 break;
 
             default:
+                Clear(); // screen cleaning
                 break;
         }
 
